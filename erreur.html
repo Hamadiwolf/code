@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erreur - Les 24H du Loup</title>
+    <title>Erreur - LES 24H DU LOUP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
     <link rel="stylesheet" href="bttn.min.css">
-
     <style>
-        /* Styles pour l'image de fond */
+        /* Styles pour l'arrière-plan */
         body {
-            background-image: url('fond.png');
+            margin: 0;
+            padding: 0;
+            background-image: url('fond.png'); /* Changer l'image d'arrière-plan ici */
             background-size: cover;
             background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
 
-        /* Styles pour le texte d'erreur */
+        /* Styles pour le titre */
         h1#error-title {
-            font-family: 'Bangers', cursive;
-            font-size: 36px; /* Taille de police réduite pour les écrans plus petits */
-            color: white;
-            text-align: center;
+            font-size: 50px; /* Taille de police réduite pour les écrans plus petits */
+            color: white; /* Changer la couleur du titre ici */
         }
 
         /* Styles pour le bouton de retour */
@@ -40,9 +41,10 @@
             border: none;
             cursor: pointer;
             font-family: Bangers;
-            font-size: 24px; /* Taille de police réduite pour les écrans plus petits */
+            font-size: 28px; /* Taille de police réduite pour les écrans plus petits */
             border-radius: 100px;
-            width: 150px; /* Définissez la largeur souhaitée pour les boutons ici */
+            width: 80%; /* Définissez la largeur souhaitée pour les boutons ici */
+            max-width: 200px; /* Limite la largeur maximale du bouton */
         }
 
         /* Styles pour le bouton de retour au survol */
@@ -53,11 +55,10 @@
 
         /* Styles pour le logo en bas de page */
         #logo {
-            width: auto; /* Réduisez la taille du logo pour les écrans plus petits */
+            width: 100px; /* Réduisez la taille du logo pour les écrans plus petits */
             height: auto; /* Ajustez la hauteur en conséquence */
-            margin-top: auto; /* Augmentez la marge supérieure du logo */
+            margin-top: 20px; /* Augmentez la marge supérieure du logo */
         }
-
     </style>
 </head>
 <body>
