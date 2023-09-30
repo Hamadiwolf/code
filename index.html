@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LES 24H DU LOUP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+    <!-- Inclure le fichier CSS bttn.min.css pour activer l'animation de bttn-unite -->
+    <link rel="stylesheet" href="C:/Users/hamad/OneDrive/Bureau/24H DU LOUP/2023-2/1 - La Chapelle-en-Serval/7 - Post Traitement/7 - Internet/bttn.min.css">
+    <style>
+        /* Styles pour l'arrière-plan */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('fond.png'); /* Changer l'image d'arrière-plan ici */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+        }
+
+        /* Styles pour le titre */
+        #title {
+            font-size: 100px; /* Changer la taille de police du titre ici */
+            margin-top: 90px; /* Changer la marge supérieure du titre ici */
+            color: white; /* Changer la couleur du titre ici */
+        }
+
+        /* Styles pour le conteneur de saisie */
+        #input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px; /* Changer la marge supérieure du conteneur de saisie ici */
+        }
+
+        /* Styles pour la zone de saisie */
+        #file-input {
+            font-size: 44px; /* Changer la taille de police de la zone de saisie ici */
+            padding: 10px; /* Changer la marge intérieure de la zone de saisie ici */
+            width: 300px; /* Changer la largeur de la zone de saisie ici */
+            text-align: center;
+            font-family: 'Bangers';
+        }
+
+        /* Styles pour le bouton "Ouvrir" */
+        #open-button {
+            font-size: 36px; /* Changer la taille de police du bouton "Ouvrir" ici */
+            margin-top: 20px; /* Changer la marge supérieure du bouton "Ouvrir" ici */
+            padding: 10px 20px;
+            background-color: white; /* Changer la couleur de fond du bouton ici */
+            color: black; /* Changer la couleur du texte du bouton ici */
+            border: none;
+            cursor: pointer;
+            /* Styles spécifiques au bouton "Ouvrir" en utilisant la classe "bttn-unite" */
+            border-radius: 100px; /* Changer la forme du bouton ici */
+            width: 200px; /* Changer la largeur du bouton ici */
+        }
+
+        /* Styles pour le survol du bouton "Ouvrir" */
+        #open-button:hover {
+            background-color: red; /* Changer la couleur de fond au survol du bouton ici */
+            color: blue;
+        }
+
+        /* Styles pour le logo en bas de page */
+        #logo {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Styles pour le bouton "Ouvrir" désactivé */
+        #open-button:disabled {
+            background-color: gray; /* Changer la couleur de fond du bouton désactivé ici */
+            color: white; /* Changer la couleur du texte du bouton désactivé ici */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <!-- Titre -->
+    <div id="title">LES 24H DU LOUP</div>
+
+    <!-- Conteneur de saisie -->
+    <div id="input-container">
+        <input type="text" id="file-input" placeholder="NOM PRENOM">
+        <br>
+        <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
+        <button class="bttn bttn-unite" id="open-button" disabled>Ouvrir</button>
+    </div>
+
+    <!-- Logo en bas de page -->
+    <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
+    
+    <script>
+        // Fonction pour vérifier si la zone de texte est vide
+        function isInputEmpty() {
+            var fileName = document.getElementById('file-input').value;
+            return fileName.trim() === ''; // Vérifie si le contenu est vide après avoir supprimé les espaces
+        }
+
+        // Fonction pour activer ou désactiver le bouton "Ouvrir"
+        function toggleOpenButton() {
+            var openButton = document.getElementById('open-button');
+            openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
+        }
+
+        // Écoutez l'événement d'entrée dans la zone de texte
+        document.getElementById('file-input').addEventListener('input', toggleOpenButton);
+
+        // Appel initial pour vérifier l'état de la zone de texte au chargement de la page
+        toggleOpenButton();
+
+        // Script pour le bouton "Ouvrir"
+        document.getElementById('open-button').addEventListener('click', function () {
+            var fileName = document.getElementById('file-input').value;
+            var url = fileName + '.png'; // Assume the extension is always .png
+
+            // Check if the file exists
+            var img = new Image();
+            img.src = url;
+            img.onload = function () {
+                window.open(url, '_blank');
+            };
+            img.onerror = function () {
+                window.location.href = 'erreur.html'; // Redirige vers la page d'erreur si le fichier n'existe pas
+            };
+        });
+    </script>
+</body>
+</html>
