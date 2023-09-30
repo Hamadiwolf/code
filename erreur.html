@@ -26,9 +26,10 @@
 
         /* Styles pour le titre */
         h1#error-title {
-            font-size: 90px; /* Taille de police réduite pour les écrans plus petits */
-            margin-top: 50px; /* Changer la marge supérieure du titre ici */
+            font-size: 100px; /* Taille de police réduite pour les écrans plus petits */
+            margin-top: -200px; /* Changer la marge supérieure du titre ici */
             color: white; /* Changer la couleur du titre ici */
+	    line-height: 1.2; /* Ajustez la hauteur de ligne (ligne unique) */
         }
 
         /* Styles pour le bouton de retour */
@@ -60,18 +61,6 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-        }
-        /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
-        @media screen and (max-width: 768px) {
-            h1#error-title {
-                font-size: 50px; /* Taille de police réduite pour les écrans plus petits */
-            }
-        
-            .bttn {
-                font-size: 28px; /* Taille de police réduite pour le bouton "Ouvrir" */
-                width: 80%; /* Largeur du bouton ajustée pour les écrans plus petits */
-            }
-            /* Autres styles de réduction pour les écrans plus petits */
         }
     </style>
 </head>
