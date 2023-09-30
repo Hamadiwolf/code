@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erreur - Les 24H du Loup</title>
+    <title>Erreur - LES 24H DU LOUP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
     <link rel="stylesheet" href="bttn.min.css">
-
     <style>
-        /* Styles pour l'image de fond */
+        /* Styles pour l'arrière-plan */
         body {
-            background-image: url('fond.png');
+            margin: 0;
+            padding: 0;
+            background-image: url('fond.png'); /* Changer l'image d'arrière-plan ici */
             background-size: cover;
             background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
 
-        /* Styles pour le texte d'erreur */
+        /* Styles pour le titre */
         h1#error-title {
-            font-family: 'Bangers', cursive;
-            font-size: 80px;
-            color: white;
-            text-align: center;
+            font-size: 100px; /* Taille de police réduite pour les écrans plus petits */
+            margin-top: 90px; /* Changer la marge supérieure du titre ici */
+            color: white; /* Changer la couleur du titre ici */
         }
 
         /* Styles pour le bouton de retour */
-
         /* Ajoutez cette classe pour définir la taille des boutons */
         .bttn {
             display: inline-block;
@@ -41,9 +42,10 @@
             border: none;
             cursor: pointer;
             font-family: Bangers;
-            font-size: 36px;
+            font-size: 28px; /* Taille de police réduite pour les écrans plus petits */
             border-radius: 100px;
-            width: 200px; /* Définissez la largeur souhaitée pour les boutons ici */
+            width: 80%; /* Définissez la largeur souhaitée pour les boutons ici */
+            max-width: 200px; /* Limite la largeur maximale du bouton */
         }
 
         /* Styles pour le bouton de retour au survol */
@@ -59,17 +61,15 @@
             left: 50%;
             transform: translateX(-50%);
         }
-
         /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
         @media screen and (max-width: 768px) {
-            /* Styles pour les écrans jusqu'à 768px de largeur */
             h1#error-title {
                 font-size: 50px; /* Taille de police réduite pour les écrans plus petits */
-                margin-top: -150px; /* Marge négative pour remonter le titre */
             }
+        
             .bttn {
-                font-size: 28px; /* Taille de police réduite pour le bouton "Retour" */
-                max-width: 200px; /* Limite la largeur maximale du bouton */
+                font-size: 28px; /* Taille de police réduite pour le bouton "Ouvrir" */
+                width: 80%; /* Largeur du bouton ajustée pour les écrans plus petits */
             }
             /* Autres styles de réduction pour les écrans plus petits */
         }
