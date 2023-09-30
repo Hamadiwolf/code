@@ -79,6 +79,22 @@
             color: white; /* Changer la couleur du texte du bouton désactivé ici */
             cursor: not-allowed;
         }
+
+        /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
+        @media screen and (max-width: 768px) {
+            #title {
+                font-size: 50px; /* Taille de police réduite pour les écrans plus petits */
+            }
+            #file-input {
+                font-size: 24px; /* Taille de police réduite pour la zone de saisie */
+                width: 80%; /* Largeur de la zone de saisie ajustée pour les écrans plus petits */
+            }
+            #open-button {
+                font-size: 28px; /* Taille de police réduite pour le bouton "Ouvrir" */
+                width: 80%; /* Largeur du bouton ajustée pour les écrans plus petits */
+            }
+            /* Autres styles de réduction pour les écrans plus petits */
+        }
     </style>
 </head>
 <body>
@@ -118,10 +134,10 @@
         // Script pour le bouton "Ouvrir"
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
-            //var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
-            //var url = folderPath + fileName + '.png'; // Assume que l'extension est toujours .png
+            var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
+            var url = folderPath + fileName + '.png'; // Assume que l'extension est toujours .png
 
-            var url = fileName + '.png';// Assume the extension is always .png
+            //var url = fileName + '.png'; Assume the extension is always .png
 
             // Check if the file exists
             var img = new Image();
@@ -132,6 +148,8 @@
             img.onerror = function () {
                 window.location.href = 'erreur.html'; // Redirige vers la page d'erreur si le fichier n'existe pas
             };
+       
+
         });
     </script>
 </body>
