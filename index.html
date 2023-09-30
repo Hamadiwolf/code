@@ -18,18 +18,13 @@
             background-attachment: fixed;
             font-family: 'Bangers', sans-serif;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         /* Styles pour le titre */
         #title {
-            font-size: 100px;
-            margin-top: 0; /* Ajustez la marge supérieure pour les écrans plus petits */
-            color: white;
+            font-size: 100px; /* Taille de police du titre */
+            margin-top: 90px; /* Marge supérieure du titre */
+            color: white; /* Couleur du titre */
         }
 
         /* Styles pour le conteneur de saisie */
@@ -38,44 +33,68 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 20px; /* Ajustez la marge supérieure pour les écrans plus petits */
+            margin-top: 50px; /* Marge supérieure du conteneur de saisie */
         }
 
         /* Styles pour la zone de saisie */
         #file-input {
-            font-size: 36px; /* Réduisez la taille de la police pour les écrans plus petits */
-            padding: 10px;
-            width: 80%; /* Ajustez la largeur pour les écrans plus petits */
-            max-width: 300px; /* Limitez la largeur maximale pour éviter de devenir trop large sur de petits écrans */
+            font-size: 44px; /* Taille de police de la zone de saisie */
+            padding: 10px; /* Marge intérieure de la zone de saisie */
+            width: 300px; /* Largeur de la zone de saisie */
             text-align: center;
             font-family: 'Bangers';
         }
 
         /* Styles pour le bouton "Ouvrir" */
         #open-button {
-            font-size: 32px; /* Réduisez la taille de la police pour les écrans plus petits */
-            margin-top: 10px; /* Ajustez la marge supérieure pour les écrans plus petits */
+            font-size: 36px; /* Taille de police du bouton "Ouvrir" */
+            margin-top: 20px; /* Marge supérieure du bouton "Ouvrir" */
             padding: 10px 20px;
-            width: 80%; /* Ajustez la largeur pour les écrans plus petits */
-            max-width: 200px; /* Limitez la largeur maximale pour éviter de devenir trop large sur de petits écrans */
-            background-color: white;
-            color: black;
+            background-color: white; /* Couleur de fond du bouton "Ouvrir" */
+            color: black; /* Couleur du texte du bouton "Ouvrir" */
             border: none;
             cursor: pointer;
             /* Styles spécifiques au bouton "Ouvrir" en utilisant la classe "bttn-unite" */
-            border-radius: 100px;
+            border-radius: 100px; /* Forme du bouton */
+            width: 200px; /* Largeur du bouton */
         }
 
         /* Styles pour le survol du bouton "Ouvrir" */
         #open-button:hover {
-            background-color: red;
-            color: blue;
+            background-color: red; /* Couleur de fond au survol du bouton */
+            color: blue; /* Couleur du texte au survol du bouton */
         }
 
         /* Styles pour le logo en bas de page */
         #logo {
-            max-width: 100%; /* Ajustez la largeur maximale du logo pour les écrans plus petits */
-            height: auto; /* Assurez-vous que la hauteur s'ajuste proportionnellement à la largeur */
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Styles pour le bouton "Ouvrir" désactivé */
+        #open-button:disabled {
+            background-color: gray; /* Couleur de fond du bouton désactivé */
+            color: white; /* Couleur du texte du bouton désactivé */
+            cursor: not-allowed;
+        }
+
+        /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
+        @media screen and (max-width: 768px) {
+            #title {
+                font-size: 50px; /* Taille de police réduite pour les écrans plus petits */
+                margin-top: 40px; /* Ajustez la marge supérieure pour les écrans plus petits */
+            }
+            #file-input {
+                font-size: 24px; /* Taille de police réduite pour la zone de saisie */
+                width: 80%; /* Largeur de la zone de saisie ajustée pour les écrans plus petits */
+            }
+            #open-button {
+                font-size: 28px; /* Taille de police réduite pour le bouton "Ouvrir" */
+                width: 80%; /* Largeur du bouton ajustée pour les écrans plus petits */
+            }
+            /* Autres styles de réduction pour les écrans plus petits */
         }
     </style>
 </head>
@@ -87,7 +106,7 @@
     <div id="input-container">
         <input type="text" id="file-input" placeholder="NOM PRENOM">
         <br>
-        <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
+                <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
         <button class="bttn bttn-unite" id="open-button" disabled>Ouvrir</button>
     </div>
 
@@ -98,13 +117,13 @@
         // Fonction pour vérifier si la zone de texte est vide
         function isInputEmpty() {
             var fileName = document.getElementById('file-input').value;
-            return fileName.trim() === '';
+            return fileName.trim() === ''; // Vérifie si le contenu est vide après avoir supprimé les espaces
         }
 
         // Fonction pour activer ou désactiver le bouton "Ouvrir"
         function toggleOpenButton() {
             var openButton = document.getElementById('open-button');
-            openButton.disabled = isInputEmpty();
+            openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
         }
 
         // Écoutez l'événement d'entrée dans la zone de texte
@@ -116,8 +135,10 @@
         // Script pour le bouton "Ouvrir"
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
-            var folderPath = 'CodeB/';
-            var url = folderPath + fileName + '.png';
+            var folderPath = 'CodeB/';//  Chemin vers le dossier "CodeB"
+            var url = folderPath + fileName + '.png';  //Assume que l'extension est toujours .png
+
+            //var url = fileName + '.png'; Assume the extension is always .png
 
             // Check if the file exists
             var img = new Image();
@@ -126,9 +147,12 @@
                 window.open(url, '_blank');
             };
             img.onerror = function () {
-                window.location.href = 'erreur.html';
+                window.location.href = 'erreur.html'; // Redirige vers la page d'erreur si le fichier n'existe pas
             };
+       
+
         });
     </script>
 </body>
 </html>
+
