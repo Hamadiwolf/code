@@ -6,7 +6,7 @@
     <title>LES 24H DU LOUP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
     <!-- Inclure le fichier CSS bttn.min.css pour activer l'animation de bttn-unite -->
-    <link rel="stylesheet" href="bttn.min.css">
+    <link rel="stylesheet" href="C:/Users/hamad/OneDrive/Bureau/24H DU LOUP/2023-2/1 - La Chapelle-en-Serval/7 - Post Traitement/7 - Internet/bttn.min.css">
     <style>
         /* Styles pour l'arrière-plan */
         body {
@@ -118,7 +118,10 @@
         // Script pour le bouton "Ouvrir"
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
-            var url = fileName + '.png'; // Assume the extension is always .png
+            var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
+            var url = folderPath + fileName + '.png'; // Assume que l'extension est toujours .png
+
+            //var url = fileName + '.png'; Assume the extension is always .png
 
             // Check if the file exists
             var img = new Image();
