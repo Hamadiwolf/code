@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
     <link rel="stylesheet" href="bttn.min.css">
     <style>
-        /* Styles communs à tous les écrans */
+        /* Styles pour l'arrière-plan */
         body {
             margin: 0;
             padding: 0;
-            background-image: url('fond.png');
+            background-image: url('fond.png'); /* Changer l'image d'arrière-plan ici */
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -26,13 +26,14 @@
 
         /* Styles pour le titre */
         h1#error-title {
-            font-size: 100px;
-            margin-top: -100px;
-            color: white;
+            font-size: 100px; /* Taille de police réduite pour les écrans plus petits */
+            margin-top: -20px; /* Changer la marge supérieure du titre ici */
+            color: white; /* Changer la couleur du titre ici */
             line-height: 1.2; /* Ajustez la hauteur de ligne (ligne unique) */
         }
 
         /* Styles pour le bouton de retour */
+        /* Ajoutez cette classe pour définir la taille des boutons */
         .bttn {
             display: inline-block;
             margin: 10px;
@@ -42,16 +43,16 @@
             border: none;
             cursor: pointer;
             font-family: Bangers;
-            font-size: 28px;
+            font-size: 28px; /* Taille de police réduite pour les écrans plus petits */
             border-radius: 100px;
-            width: 200px;
-            max-width: 80%; /* Limite la largeur maximale du bouton pour les petits écrans */
+            width: 80%; /* Définissez la largeur souhaitée pour les boutons ici */
+            max-width: 200px; /* Limite la largeur maximale du bouton */
         }
 
         /* Styles pour le bouton de retour au survol */
         .bttn-unite:hover {
-            background-color: red;
-            color: blue;
+            background-color: red; /* Changer la couleur de fond au survol ici */
+            color: blue; /* Changer la couleur du texte au survol ici */
         }
 
         /* Styles pour le logo en bas de page */
@@ -60,20 +61,6 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-        }
-
-        /* Styles spécifiques pour les écrans plus petits (jusqu'à 768px de largeur) */
-        @media screen and (max-width: 768px) {
-            /* Réduisez la taille du titre */
-            h1#error-title {
-                font-size: 50px;
-                margin-top: -50px;
-            }
-
-            /* Réduisez la taille du bouton de retour */
-            .bttn {
-                font-size: 24px;
-            }
         }
     </style>
 </head>
