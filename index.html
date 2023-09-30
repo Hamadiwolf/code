@@ -28,30 +28,42 @@
         /* Styles pour le titre */
         #title {
             font-size: 100px;
-            margin-top: 90px;
+            margin-top: 0; /* Ajustez la marge supérieure pour les écrans plus petits */
             color: white;
+        }
+
+        /* Styles pour le conteneur de saisie */
+        #input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px; /* Ajustez la marge supérieure pour les écrans plus petits */
         }
 
         /* Styles pour la zone de saisie */
         #file-input {
-            font-size: 44px;
+            font-size: 36px; /* Réduisez la taille de la police pour les écrans plus petits */
             padding: 10px;
-            width: 300px;
+            width: 80%; /* Ajustez la largeur pour les écrans plus petits */
+            max-width: 300px; /* Limitez la largeur maximale pour éviter de devenir trop large sur de petits écrans */
             text-align: center;
             font-family: 'Bangers';
         }
 
         /* Styles pour le bouton "Ouvrir" */
         #open-button {
-            font-size: 36px;
-            margin-top: 20px;
+            font-size: 32px; /* Réduisez la taille de la police pour les écrans plus petits */
+            margin-top: 10px; /* Ajustez la marge supérieure pour les écrans plus petits */
             padding: 10px 20px;
+            width: 80%; /* Ajustez la largeur pour les écrans plus petits */
+            max-width: 200px; /* Limitez la largeur maximale pour éviter de devenir trop large sur de petits écrans */
             background-color: white;
             color: black;
             border: none;
             cursor: pointer;
+            /* Styles spécifiques au bouton "Ouvrir" en utilisant la classe "bttn-unite" */
             border-radius: 100px;
-            width: 200px;
         }
 
         /* Styles pour le survol du bouton "Ouvrir" */
@@ -62,31 +74,8 @@
 
         /* Styles pour le logo en bas de page */
         #logo {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Styles spécifiques pour les écrans plus petits (jusqu'à 768px de largeur) */
-        @media screen and (max-width: 768px) {
-            /* Réduisez la taille du titre */
-            #title {
-                font-size: 50px;
-                margin-top: 30px;
-            }
-
-            /* Réduisez la taille de la zone de saisie */
-            #file-input {
-                font-size: 24px;
-                width: 80%;
-            }
-
-            /* Réduisez la taille du bouton "Ouvrir" */
-            #open-button {
-                font-size: 28px;
-                width: 80%;
-            }
+            max-width: 100%; /* Ajustez la largeur maximale du logo pour les écrans plus petits */
+            height: auto; /* Assurez-vous que la hauteur s'ajuste proportionnellement à la largeur */
         }
     </style>
 </head>
