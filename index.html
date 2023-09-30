@@ -134,10 +134,10 @@
         // Script pour le bouton "Ouvrir"
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
-            var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
-            var url = folderPath + fileName + '.png'; // Assume que l'extension est toujours .png
+            //var folderPath = 'CodeB/';  Chemin vers le dossier "CodeB"
+            //var url = folderPath + fileName + '.png';  Assume que l'extension est toujours .png
 
-            //var url = fileName + '.png'; Assume the extension is always .png
+            var url = fileName + '.png'; //Assume the extension is always .png
 
             // Check if the file exists
             var img = new Image();
