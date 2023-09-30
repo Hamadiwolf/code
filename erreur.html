@@ -52,6 +52,14 @@
             color: blue; /* Changer la couleur du texte au survol ici */
         }
 
+        /* Styles pour le logo en bas de page */
+        #logo {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
         @media screen and (max-width: 768px) {
             /* Styles pour les écrans jusqu'à 768px de largeur */
@@ -69,5 +77,7 @@
 <body>
     <h1 id="error-title">TU N'ES PAS INSCRIT</h1>
     <a class="bttn bttn-unite" href="index.html">Retour</a>
+    <!-- Logo en bas de page -->
+    <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
 </body>
 </html>
