@@ -102,7 +102,7 @@
     <!-- Titre -->
     <div id="title">LES 24H DU LOUP</div>
 
-    <!-- Conteneur de saisie -->
+        <!-- Conteneur de saisie -->
     <div id="input-container">
         <input type="text" id="file-input" placeholder="NOM PRENOM">
         <br>
@@ -138,31 +138,33 @@
             var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
             var url = folderPath + fileName + '.png';  // Assume que l'extension est toujours .png
 
-            // Créer un lien de téléchargement
-            var downloadLink = document.createElement('a');
-            downloadLink.href = url;
-            downloadLink.download = fileName + '.png'; // Définir le nom de fichier pour le téléchargement
-            downloadLink.style.display = 'none'; // Cacher le lien
+            // Vérifier si le fichier existe
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Le fichier existe, créer un lien de téléchargement
+                        var downloadLink = document.createElement('a');
+                        downloadLink.href = url;
+                        downloadLink.download = fileName + '.png'; // Définir le nom de fichier pour le téléchargement
+                        downloadLink.style.display = 'none'; // Cacher le lien
 
-            // Ajouter le lien au document
-            document.body.appendChild(downloadLink);
+                        // Ajouter le lien au document
+                        document.body.appendChild(downloadLink);
 
                         // Simuler un clic sur le lien pour déclencher le téléchargement
-            downloadLink.click();
+                        downloadLink.click();
 
-            // Retirer le lien du document
-            document.body.removeChild(downloadLink);
-
-            // Vérifier si le fichier existe
-            var img = new Image();
-            img.src = url;
-            img.onload = function () {
-                // Le fichier existe, rien à faire
+                        // Retirer le lien du document
+                        document.body.removeChild(downloadLink);
+                    } else {
+                        // Le fichier n'existe pas, rediriger vers erreur.html
+                        window.location.href = 'erreur.html';
+                    }
+                }
             };
-            img.onerror = function () {
-                // Le fichier n'existe pas, rediriger vers erreur.html
-                window.location.href = 'erreur.html';
-            };
+            xhr.send();
         });
     </script>
 </body>
