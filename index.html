@@ -132,27 +132,27 @@
         // Appel initial pour vérifier l'état de la zone de texte au chargement de la page
         toggleOpenButton();
 
-        // Script pour le bouton "Ouvrir"
+        // Script pour le bouton "Ouvrir" (télécharger)
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
-            var folderPath = 'CodeB/';//  Chemin vers le dossier "CodeB"
-            var url = folderPath + fileName + '.png';  //Assume que l'extension est toujours .png
+            var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
+            var url = folderPath + fileName + '.png';  // Assume que l'extension est toujours .png
 
-            //var url = fileName + '.png'; Assume the extension is always .png
+            // Créer un lien de téléchargement
+            var downloadLink = document.createElement('a');
+            downloadLink.href = url;
+            downloadLink.download = fileName + '.png'; // Définir le nom de fichier pour le téléchargement
+            downloadLink.style.display = 'none'; // Cacher le lien
 
-            // Check if the file exists
-            var img = new Image();
-            img.src = url;
-            img.onload = function () {
-                window.open(url, '_blank');
-            };
-            img.onerror = function () {
-                window.location.href = 'erreur.html'; // Redirige vers la page d'erreur si le fichier n'existe pas
-            };
-       
+            // Ajouter le lien au document
+            document.body.appendChild(downloadLink);
 
+            // Simuler un clic sur le lien pour déclencher le téléchargement
+            downloadLink.click();
+
+            // Retirer le lien du document
+            document.body.removeChild(downloadLink);
         });
     </script>
 </body>
 </html>
-
