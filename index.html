@@ -114,73 +114,62 @@
     <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
     
     <script>
-        // Fonction pour vérifier si la zone de texte est vide
-        function isInputEmpty() {
-            var fileName = document.getElementById('file-input').value;
-            return fileName.trim() === ''; // Vérifie si le contenu est vide après avoir supprimé les espaces
-        }
+        // Fonction pour vérifier si le fichier existe en utilisant une extension
+    function checkFileExistence(fileName, extension, callback) {
+        var url = folderPath + fileName + extension;
 
-        // Fonction pour activer ou désactiver le bouton "Ouvrir"
-        function toggleOpenButton() {
-            var openButton = document.getElementById('open-button');
-            openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
-        }
-
-        // Écoutez l'événement d'entrée dans la zone de texte
-        document.getElementById('file-input').addEventListener('input', toggleOpenButton);
-
-        // Appel initial pour vérifier l'état de la zone de texte au chargement de la page
-        toggleOpenButton();
-
-        // Script pour le bouton "Ouvrir" (télécharger)
-document.getElementById('open-button').addEventListener('click', function () {
-    var fileName = document.getElementById('file-input').value;
-    var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
-    
-    // Essayer d'abord avec l'extension .png
-    var urlPNG = folderPath + fileName + '.png';
-
-    // Vérifier si le fichier PNG existe
-    var xhrPNG = new XMLHttpRequest();
-    xhrPNG.open('HEAD', urlPNG, true);
-    xhrPNG.onreadystatechange = function () {
-        if (xhrPNG.readyState === 4 && xhrPNG.status === 200) {
-            // Le fichier PNG existe, créer un lien de téléchargement pour le PNG
-            var downloadLinkPNG = document.createElement('a');
-            downloadLinkPNG.href = urlPNG;
-            downloadLinkPNG.download = fileName + '.png';
-            downloadLinkPNG.style.display = 'none';
-            document.body.appendChild(downloadLinkPNG);
-            downloadLinkPNG.click();
-            document.body.removeChild(downloadLinkPNG);
-        } else {
-            // Le fichier PNG n'existe pas, essayer avec l'extension .pdf
-            var urlPDF = folderPath + fileName + '.pdf';
-
-            // Vérifier si le fichier PDF existe
-            var xhrPDF = new XMLHttpRequest();
-            xhrPDF.open('HEAD', urlPDF, true);
-            xhrPDF.onreadystatechange = function () {
-                if (xhrPDF.readyState === 4 && xhrPDF.status === 200) {
-                    // Le fichier PDF existe, créer un lien de téléchargement pour le PDF
-                    var downloadLinkPDF = document.createElement('a');
-                    downloadLinkPDF.href = urlPDF;
-                    downloadLinkPDF.download = fileName + '.pdf';
-                    downloadLinkPDF.style.display = 'none';
-                    document.body.appendChild(downloadLinkPDF);
-                    downloadLinkPDF.click();
-                    document.body.removeChild(downloadLinkPDF);
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    // Le fichier existe, appeler le callback avec l'URL du fichier
+                    callback(url);
                 } else {
-                    // Ni le fichier PNG ni le fichier PDF n'existent, rediriger vers erreur.html
-                    window.location.href = 'erreur.html';
+                    // Le fichier n'existe pas, appeler le callback avec null
+                    callback(null);
                 }
-            };
-            xhrPDF.send();
-        }
-    };
-    xhrPNG.send();
-});
+            }
+        };
+        xhr.send();
+    }
 
-    </script>
+    // Script pour le bouton "Ouvrir" (télécharger)
+    document.getElementById('open-button').addEventListener('click', function () {
+        var fileName = document.getElementById('file-input').value;
+        var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
+
+        // Essayer d'abord avec l'extension .png
+        checkFileExistence(fileName, '.png', function (url) {
+            if (url) {
+                // Le fichier PNG existe, créer un lien de téléchargement pour le PNG
+                var downloadLink = document.createElement('a');
+                downloadLink.href = url;
+                downloadLink.download = fileName + '.png';
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            } else {
+                // Le fichier PNG n'existe pas, essayer avec l'extension .pdf
+                checkFileExistence(fileName, '.pdf', function (url) {
+                    if (url) {
+                        // Le fichier PDF existe, créer un lien de téléchargement pour le PDF
+                        var downloadLink = document.createElement('a');
+                        downloadLink.href = url;
+                        downloadLink.download = fileName + '.pdf';
+                        downloadLink.style.display = 'none';
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                    } else {
+                        // Ni le fichier PNG ni le fichier PDF n'existent, rediriger vers erreur.html
+                        window.location.href = 'erreur.html';
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>
