@@ -42,7 +42,7 @@
             padding: 10px; /* Marge intérieure de la zone de saisie */
             width: 300px; /* Largeur de la zone de saisie */
             text-align: center;
-            font-family: 'Bangers';
+            font-family: 'Calibri';
         }
 
         /* Styles pour le bouton "Ouvrir" */
@@ -96,6 +96,20 @@
             }
             /* Autres styles de réduction pour les écrans plus petits */
         }
+
+        /* Styles pour le conteneur des textes */
+        #text-container {
+            margin-top: 20px; /* Marge supérieure pour les textes */
+            font-size: 24px; /* Taille de police pour les textes */
+            color: white; /* Couleur du texte */
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+        }
+
+        /* Styles pour les textes */
+        .result-text {
+            margin-top: 10px; /* Marge supérieure entre les textes */
+        }
     </style>
 </head>
 <body>
@@ -104,10 +118,16 @@
 
     <!-- Conteneur de saisie -->
     <div id="input-container">
-        <input type="text" id="file-input" placeholder="NOM PRENOM">
+        <input type="text" id="file-input" placeholder="PRENOM NOM (24)">
         <br>
         <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
         <button class="bttn bttn-unite" id="open-button" disabled>Ouvrir</button>
+    </div>
+
+    <!-- Conteneur des textes -->
+    <div id="text-container">
+        <div class="result-text">Obtenir son code barre : PRENOM NOM (EN MAJUSCULE)</div>
+        <div class="result-text">Obtenir sa fiche résultat : PRENOM NOM 24 (EN MAJUSCULE)</div>
     </div>
 
     <!-- Logo en bas de page -->
@@ -185,11 +205,22 @@
             openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
         }
 
+        // Fonction pour mettre à jour les textes en fonction de ce qui est saisi
+        function updateResultText() {
+            var fileName = document.getElementById('file-input').value.toUpperCase();
+            document.getElementById('code-barre-text').textContent = fileName;
+            document.getElementById('fiche-resultat-text').textContent = fileName + ' 24';
+        }
+
         // Écoutez l'événement d'entrée dans la zone de texte
-        document.getElementById('file-input').addEventListener('input', toggleOpenButton);
+        document.getElementById('file-input').addEventListener('input', function () {
+            toggleOpenButton();
+            updateResultText();
+        });
 
         // Appel initial pour vérifier l'état de la zone de texte au chargement de la page
         toggleOpenButton();
+        updateResultText();
     </script>
 </body>
 </html>
