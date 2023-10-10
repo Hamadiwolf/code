@@ -25,7 +25,7 @@
         }
 
         /* Styles pour le titre */
-        h1#error-title {
+        #error-title {
             font-size: 100px; /* Taille de police réduite pour les écrans plus petits */
             margin-top: -20px; /* Changer la marge supérieure du titre ici */
             color: white; /* Changer la couleur du titre ici */
@@ -49,6 +49,16 @@
             width: 80%; /* Définissez la largeur souhaitée pour les boutons ici */
             max-width: 200px; /* Limite la largeur maximale du bouton */
         }
+	
+
+	/* Styles pour les textes ajoutés pour les grands écrans */
+	.error-text {
+    		font-size: 24px; /* Taille de police pour les grands écrans */
+    		margin-top: 20px; /* Marge supérieure pour les grands écrans */
+    		color: white; /* Couleur du texte en blanc */
+    		font-family: 'Bangers'; /* Police Bangers */
+		}
+
 
         /* Styles pour le bouton de retour au survol */
         .bttn-unite:hover {
@@ -66,7 +76,7 @@
 
         /* Styles spécifiques pour les écrans plus petits (max-width: 768px) */
         @media screen and (max-width: 768px) {
-            h1#error-title {
+            #error-title {
                 font-size: 40px;
                 margin-top: -200px;
             }
@@ -74,16 +84,26 @@
             .bttn {
                 font-size: 24px;
             }
-	/* Styles pour le logo en bas de page pour les petits écrans */
-    	    #logo {
-        	width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
-        	height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
-    	    }	     
+
+            /* Styles pour le logo en bas de page pour les petits écrans */
+            #logo {
+                width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
+                height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
+            }
+
+            /* Styles pour les textes ajoutés pour les petits écrans */
+            .error-text {
+                font-size: 16px;
+                margin-top: 10px;
+                color: white; /* Changer la couleur du texte en blanc */
+                font-family: 'Bangers', sans-serif; /* Utiliser la police Bangers */
+            }
         }
     </style>
 </head>
 <body>
-    <h1 id="error-title">TU N'ES PAS INSCRIT</h1>
+    <div id="error-title">TU AS DÛ TE TROMPER...</div>
+    <div class="error-text">PENSES BIEN A TOUT METTRE EN MAJUSCULE</div>
     <a class="bttn bttn-unite" href="index.html">Retour</a>
     <!-- Logo en bas de page -->
     <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
