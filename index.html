@@ -40,9 +40,10 @@
         #file-input {
             font-size: 44px; /* Taille de police de la zone de saisie */
             padding: 10px; /* Marge intérieure de la zone de saisie */
-            width: 300px; /* Largeur de la zone de saisie */
+            /*width: 300px;  Largeur de la zone de saisie */
             text-align: center;
             font-family: 'Calibri';
+	    max-width: 100%; 
         }
 
         /* Styles pour le bouton "Ouvrir" */
@@ -81,21 +82,30 @@
         }
 
         /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
-        @media screen and (max-width: 768px) {
-            #title {
-                font-size: 50px; /* Taille de police réduite pour les écrans plus petits */
-                margin-top: 40px; /* Ajustez la marge supérieure pour les écrans plus petits */
-            }
-            #file-input {
-                font-size: 24px; /* Taille de police réduite pour la zone de saisie */
-                width: 80%; /* Largeur de la zone de saisie ajustée pour les écrans plus petits */
-            }
-            #open-button {
-                font-size: 28px; /* Taille de police réduite pour le bouton "Ouvrir" */
-                width: 80%; /* Largeur du bouton ajustée pour les écrans plus petits */
-            }
-            /* Autres styles de réduction pour les écrans plus petits */
-        }
+	@media screen and (max-width: 768px) {
+    		#title {
+        		font-size: 50px;
+        		margin-top: 40px;
+    		}
+    		#file-input {
+        		font-size: 24px;
+        		width: 80%;
+    		}
+    		#open-button {
+        		font-size: 28px;
+        		width: 80%;
+    		}
+    		/* Styles pour le logo en bas de page pour les petits écrans */
+    		#logo {
+        		width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
+        		height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
+    		}
+    		/* Styles pour les textes sous le bouton "Ouvrir" pour les petits écrans */
+    		.result-text {
+        		font-size: 16px;
+    		}
+	}
+
 
         /* Styles pour le conteneur des textes */
         #text-container {
