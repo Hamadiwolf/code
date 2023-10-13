@@ -43,7 +43,7 @@
             /*width: 300px;  Largeur de la zone de saisie */
             text-align: center;
             font-family: 'Calibri';
-	    max-width: 100%; 
+            max-width: 100%; 
         }
 
         /* Styles pour le bouton "Ouvrir" */
@@ -185,7 +185,7 @@
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
             if (fileName) {
-                // Créer un lien de téléchargement pour le fichier PNG
+                // Essayer de télécharger le fichier PNG
                 var downloadLink = document.createElement('a');
                 downloadLink.href = 'CodeB/' + fileName + '.png';
                 downloadLink.download = fileName + '.png';
@@ -193,6 +193,10 @@
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
+            }
+            else {
+                // Si le champ est vide, rediriger vers la page "erreur.html"
+                window.location.href = 'erreur.html';
             }
         });
     </script>
