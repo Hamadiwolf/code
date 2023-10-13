@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Écrire dans un fichier CSV sur GitHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        input {
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Écrire dans un fichier CSV sur GitHub</h1>
+    <label for="data">Entrez les données à ajouter au fichier CSV :</label>
+    <input type="text" id="data">
+    <button onclick="addToCSV()">Ajouter</button>
+    <p id="message"></p>
+
+    <script>
+        const github_username = 'Hamadiwolf';
+        const github_token = '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';
+        const repository_owner = 'Hamadiwolf';
+        const repository_name = 'code';
+        const file_path = 'donnees.csv';
+
+        async function addToCSV() {
+            const data = document.getElementById('data').value;
+
+            if (!data) {
+                document.getElementById('message').innerText = 'Veuillez entrer des données.';
+                return;
+            }
+
+            const apiUrl = `https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${file_path}`;
+            const contentResponse = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `token ${github_token}`
+                }
+            });
+
+            if (contentResponse.ok) {
+                const contentData = await contentResponse.json();
+                const csvContent = atob(contentData.content);
+                const newData = csvContent + ',' + data;
+                const newContent = btoa(newData);
+
+                const updateResponse = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${github_token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: 'Mise à jour du fichier CSV',
+                        content: newContent,
+                        sha: contentData.sha,
+                    }),
+                });
+
+                if (updateResponse.ok) {
+                    document.getElementById('message').innerText = 'Données ajoutées avec succès.';
+                } else {
+                    document.getElementById('message').innerText = 'Erreur lors de la mise à jour du fichier.';
+                }
+            } else {
+                document.getElementById('message').innerText = 'Erreur lors de la récupération du fichier.';
+            }
+        }
+    </script>
+</body>
+</html>
