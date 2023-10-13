@@ -178,17 +178,32 @@
         // Script pour le bouton "Ouvrir" (télécharger)
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
-
+            
             // Vérifier si le texte saisi n'est pas vide
             if (!isInputEmpty()) {
-                // Créer un lien de téléchargement pour le fichier PDF
-                var downloadLink = document.createElement('a');
-                downloadLink.href = 'CodeB/' + fileName + '.pdf';
-                downloadLink.download = fileName + '.pdf';
-                downloadLink.style.display = 'none';
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
+                // Essayer d'abord avec l'extension .pdf
+                var pdfUrl = 'CodeB/' + fileName + '.pdf';
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open('HEAD', pdfUrl, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // Le fichier PDF existe, créer un lien de téléchargement pour le PDF
+                            var downloadLink = document.createElement('a');
+                            downloadLink.href = pdfUrl;
+                            downloadLink.download = fileName + '.pdf';
+                            downloadLink.style.display = 'none';
+                            document.body.appendChild(downloadLink);
+                            downloadLink.click();
+                            document.body.removeChild(downloadLink);
+                        } else {
+                            // Le fichier PDF n'existe pas, rediriger vers erreur.html
+                            window.location.href = 'erreur.html';
+                        }
+                    }
+                };
+                xhr.send();
             }
         });
     </script>
