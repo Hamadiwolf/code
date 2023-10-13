@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
     <!-- Inclure le fichier CSS bttn.min.css pour activer l'animation de bttn-unite -->
     <link rel="stylesheet" href="bttn.min.css">
-    <title>Créer/Mettre à jour un fichier GitHub</title>
 
     <style>
         /* Styles communs à tous les écrans */
@@ -38,7 +37,7 @@
             margin-top: 50px; /* Marge supérieure du conteneur de saisie */
         }
        /* Styles pour la zone de saisie */
-        #file-input {
+        #inputText {
             font-size: 44px; /* Taille de police de la zone de saisie */
             padding: 10px; /* Marge intérieure de la zone de saisie */
             /*width: 300px;  Largeur de la zone de saisie */
@@ -105,7 +104,7 @@
         		font-size: 50px;
         		margin-top: 40px;
     		}
-    		#file-input {
+    		#inputText {
         		font-size: 24px;
         		width: 80%;
     		}
@@ -142,7 +141,7 @@
     <div id="title">LES 24H DU LOUP</div>
     <!-- Conteneur de saisie -->
     <div id="input-container">
-        <input type="text" id="file-input" placeholder="LETS'GO">
+        <input type="text" id="inputText" placeholder="LETS'GO">
         <br>
         <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
         <button class="bttn bttn-unite" id="sous-button" onclick="createOrUpdateFile()">Soumettre</button>
@@ -155,12 +154,12 @@
     
     <script>
         async function createOrUpdateFile() {
-            const githubToken = process.env.GITHUB_TOKEN;
+            const github_token = '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';
             const repository_owner = 'Hamadiwolf';
             const repository_name = 'code';
             const github_folder_path = 'CodeB';
             const file_path = 'texte.txt';
-            const inputText = document.getElementById('file-input').value;
+            const inputText = document.getElementById('inputText').value;
             
             // Vérifiez si le fichier existe
             const responseCheck = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`);
