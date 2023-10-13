@@ -60,7 +60,7 @@
             width: 200px; /* Largeur du bouton */
         }
 
-/* Styles pour le bouton "Retour" */
+        /* Styles pour le bouton "Retour" */
         #return-button {
             font-size: 36px; 
             margin-top: 20px; 
@@ -95,34 +95,33 @@
         }
 
         /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
-	@media screen and (max-width: 768px) {
-    		#title {
-        		font-size: 50px;
-        		margin-top: 40px;
-    		}
-    		#file-input {
-        		font-size: 24px;
-        		width: 80%;
-    		}
-    		#open-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-		#return-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-    		/* Styles pour le logo en bas de page pour les petits écrans */
-    		#logo {
-        		width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
-        		height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
-    		}
-    		/* Styles pour les textes sous le bouton "Ouvrir" pour les petits écrans */
-    		.result-text {
-        		font-size: 16px;
-    		}
-	}
-
+        @media screen and (max-width: 768px) {
+            #title {
+                font-size: 50px;
+                margin-top: 40px;
+            }
+            #file-input {
+                font-size: 24px;
+                width: 80%;
+            }
+            #open-button {
+                font-size: 28px;
+                width: 80%;
+            }
+            #return-button {
+                font-size: 28px;
+                width: 80%;
+            }
+            /* Styles pour le logo en bas de page pour les petits écrans */
+            #logo {
+                width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
+                height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
+            }
+            /* Styles pour les textes sous le bouton "Ouvrir" pour les petits écrans */
+            .result-text {
+                font-size: 16px;
+            }
+        }
 
         /* Styles pour le conteneur des textes */
         #text-container {
@@ -150,9 +149,8 @@
         <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
         <button class="bttn bttn-unite" id="open-button" disabled>Ouvrir</button>
     </div>
-<!-- Bouton "Retour" en dehors du conteneur de saisie -->
+    <!-- Bouton "Retour" en dehors du conteneur de saisie -->
     <button class="bttn bttn-unite" id="return-button" onclick="location.href='menu.html'">Retour</button>
-
 
     <!-- Conteneur des textes -->
     <div id="text-container">
@@ -163,69 +161,11 @@
     <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
     
     <script>
-        // Déclaration de la variable folderPath
-        var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
-
-        // Fonction pour vérifier si le fichier existe en utilisant une extension
-        function checkFileExistence(fileName, extension, callback) {
-            var url = folderPath + fileName + extension;
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('HEAD', url, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Le fichier existe, appeler le callback avec l'URL du fichier
-                        callback(url);
-                    } else {
-                        // Le fichier n'existe pas, appeler le callback avec null
-                        callback(null);
-                    }
-                }
-            };
-            xhr.send();
+        // Fonction pour activer ou désactiver le bouton "Ouvrir"
+        function toggleOpenButton() {
+            var openButton = document.getElementById('open-button');
+            openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
         }
-
-        // Script pour le bouton "Ouvrir" (télécharger)
-document.getElementById('open-button').addEventListener('click', function () {
-    var fileName = document.getElementById('file-input').value;
-
-    // Vérifier si le texte saisi est "WOLF"
-    if (fileName.toUpperCase() === "WOLF") {
-        window.location.href = 'saisie.html';
-    } else {
-        // Essayer d'abord avec l'extension .png
-        checkFileExistence(fileName, '.png', function (url) {
-            if (url) {
-                // Le fichier PNG existe, créer un lien de téléchargement pour le PNG
-                var downloadLink = document.createElement('a');
-                downloadLink.href = url;
-                downloadLink.download = fileName + '.png';
-                downloadLink.style.display = 'none';
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            } else {
-                // Le fichier PNG n'existe pas, essayer avec l'extension .pdf
-                checkFileExistence(fileName, '.pdf', function (url) {
-                    if (url) {
-                        // Le fichier PDF existe, créer un lien de téléchargement pour le PDF
-                        var downloadLink = document.createElement('a');
-                        downloadLink.href = url;
-                        downloadLink.download = fileName + '.pdf';
-                        downloadLink.style.display = 'none';
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
-                    } else {
-                        // Ni le fichier PNG ni le fichier PDF n'existent, rediriger vers erreur.html
-                        window.location.href = 'erreur.html';
-                    }
-                });
-            }
-        });
-    }
-});
 
         // Fonction pour vérifier si la zone de texte est vide
         function isInputEmpty() {
@@ -233,28 +173,28 @@ document.getElementById('open-button').addEventListener('click', function () {
             return fileName.trim() === ''; // Vérifie si le contenu est vide après avoir supprimé les espaces
         }
 
-        // Fonction pour activer ou désactiver le bouton "Ouvrir"
-        function toggleOpenButton() {
-            var openButton = document.getElementById('open-button');
-            openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
-        }
-
-        // Fonction pour mettre à jour les textes en fonction de ce qui est saisi
-        function updateResultText() {
-            var fileName = document.getElementById('file-input').value.toUpperCase();
-            document.getElementById('code-barre-text').textContent = fileName;
-            document.getElementById('fiche-resultat-text').textContent = fileName + ' 24';
-        }
-
         // Écoutez l'événement d'entrée dans la zone de texte
         document.getElementById('file-input').addEventListener('input', function () {
             toggleOpenButton();
-            updateResultText();
         });
 
         // Appel initial pour vérifier l'état de la zone de texte au chargement de la page
         toggleOpenButton();
-        updateResultText();
+        
+        // Script pour le bouton "Ouvrir" (télécharger)
+        document.getElementById('open-button').addEventListener('click', function () {
+            var fileName = document.getElementById('file-input').value;
+            if (fileName) {
+                // Créer un lien de téléchargement pour le fichier PNG
+                var downloadLink = document.createElement('a');
+                downloadLink.href = 'CodeB/' + fileName + '.png';
+                downloadLink.download = fileName + '.png';
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+        });
     </script>
 </body>
 </html>
