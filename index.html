@@ -34,6 +34,42 @@
             left: 50%;
             transform: translateX(-50%);
         }
+/* Styles pour le bouton "CodeBarre" */
+        #code-barre-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px; /* Forme du bouton */
+            width: 200px; /* Largeur du bouton */
+        }
+/* Styles pour le bouton "Results" */
+        #result-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px; /* Forme du bouton */
+            width: 200px; /* Largeur du bouton */
+        }
+/* Styles pour le bouton "sos" */
+        #sos-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px; /* Forme du bouton */
+            width: 200px; /* Largeur du bouton */
+        }
 
         /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
         @media screen and (max-width: 768px) {
@@ -41,6 +77,18 @@
                 font-size: 50px;
                 margin-top: 40px;
             }
+	    #sos-button {
+        		font-size: 28px;
+        		width: 80%;
+    		}
+	    #result-button {
+        		font-size: 28px;
+        		width: 80%;
+    		}
+	    #code-barre-button {
+        		font-size: 28px;
+        		width: 80%;
+    		}
             /* Styles pour le logo en bas de page pour les petits écrans */
             #logo {
                 width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
@@ -92,7 +140,7 @@
     <!-- Conteneur pour les boutons -->
     <div class="button-container">
         <!-- Bouton "Code Barre" -->
-        <button class="bttn bttn-unite custom-button" id="code-barre-button" onclick="window.location.href='codebarre.html';">Code Barre</button>
+        <button class="bttn bttn-unite custom-button" id="code-barre-button" onclick="location.href='codebarre.html';">Code Barre</button>
 
         <!-- Bouton "Résultat" -->
         <button class="bttn bttn-unite custom-button" id="result-button" onclick="location.href='results.html';">Résultat</button>
