@@ -155,7 +155,7 @@
     
     <script>
         async function createOrUpdateFile() {
-            const github_token = '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';
+            const githubToken = process.env.GITHUB_TOKEN;
             const repository_owner = 'Hamadiwolf';
             const repository_name = 'code';
             const github_folder_path = 'CodeB';
