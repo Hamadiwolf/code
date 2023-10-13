@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LES 24H DU LOUP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+    <!-- Inclure le fichier CSS bttn.min.css pour activer l'animation de bttn-unite -->
+    <link rel="stylesheet" href="bttn.min.css">
+    <title>Créer/Mettre à jour un fichier GitHub</title>
+
+    <style>
+        /* Styles communs à tous les écrans */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('fond.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+        }
+
+        /* Styles pour le titre */
+        #title {
+            font-size: 100px; /* Taille de police du titre */
+            margin-top: 90px; /* Marge supérieure du titre */
+            color: white; /* Couleur du titre */
+        }
+
+        /* Styles pour le conteneur de saisie */
+        #input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px; /* Marge supérieure du conteneur de saisie */
+        }
+       /* Styles pour la zone de saisie */
+        #file-input {
+            font-size: 44px; /* Taille de police de la zone de saisie */
+            padding: 10px; /* Marge intérieure de la zone de saisie */
+            /*width: 300px;  Largeur de la zone de saisie */
+            text-align: center;
+            font-family: 'Calibri';
+	    max-width: 100%; 
+        }
+        /* Styles pour le bouton "Soumettre" */
+        #sous-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white; 
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px;
+            width: 200px;
+        }
+	/* Styles pour le bouton "Retour" */
+        #return-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px; /* Forme du bouton */
+            width: 200px; /* Largeur du bouton */
+        }
+
+        /* Styles pour le survol du bouton "Soumettre" */
+        #sous-button:hover {
+            background-color: red; /* Couleur de fond au survol du bouton */
+            color: blue; /* Couleur du texte au survol du bouton */
+        }
+	
+	/* Styles pour le survol du bouton "Retour" */
+        #return-button:hover {
+            background-color: red; /* Couleur de fond au survol du bouton */
+            color: blue; /* Couleur du texte au survol du bouton */
+        }
+
+        /* Styles pour le logo en bas de page */
+        #logo {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Styles pour le bouton "Ouvrir" désactivé */
+        #sous-button:disabled {
+            background-color: gray; 
+            color: white; 
+            cursor: not-allowed;
+        }
+
+
+        /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
+	@media screen and (max-width: 768px) {
+    		#title {
+        		font-size: 50px;
+        		margin-top: 40px;
+    		}
+    		#file-input {
+        		font-size: 24px;
+        		width: 80%;
+    		}
+    		#sous-button {
+        		font-size: 28px;
+        		width: 80%;
+    		}
+		#return-button {
+                font-size: 28px;
+                width: 80%;
+            	}
+
+    		/* Styles pour le logo en bas de page pour les petits écrans */
+    		#logo {
+        		width: 120px;
+        		height: auto;
+    		}
+	}
+
+        /* Styles pour le conteneur des textes */
+        #text-container {
+            margin-top: 20px; /* Marge supérieure pour les textes */
+            font-size: 24px; /* Taille de police pour les textes */
+            color: white; /* Couleur du texte */
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Titre -->
+    <div id="title">LES 24H DU LOUP</div>
+    <!-- Conteneur de saisie -->
+    <div id="input-container">
+        <input type="text" id="file-input" placeholder="LETS'GO">
+        <br>
+        <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
+        <button class="bttn bttn-unite" id="sous-button" onclick="createOrUpdateFile()">Soumettre</button>
+    </div>
+    <!-- Bouton "Retour" en dehors du conteneur de saisie -->
+    <button class="bttn bttn-unite" id="return-button" onclick="location.href='index.html'">Retour</button>
+
+    <!-- Logo en bas de page -->
+    <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
+    
+    <script>
+        async function createOrUpdateFile() {
+            const github_token = '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';
+            const repository_owner = 'Hamadiwolf';
+            const repository_name = 'code';
+            const github_folder_path = 'CodeB';
+            const file_path = 'texte.txt';
+            const inputText = document.getElementById('file-input').value;
+            
+            // Vérifiez si le fichier existe
+            const responseCheck = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`);
+            const dataCheck = await responseCheck.json();
+  
+            if (responseCheck.status === 200) {
+                // Le fichier existe, récupérez la SHA
+                const sha = dataCheck.sha;
+
+                // Mettez à jour le fichier .txt dans le référentiel GitHub
+                const responseUpdate = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${github_token}`,
+                    },
+                    body: JSON.stringify({
+                        message: 'Mise à jour du fichier',
+                        content: btoa(inputText), // Encodez le texte en base64
+                        sha: sha // Utilisez la SHA pour mettre à jour le fichier existant
+                    })
+                });
+
+                if (responseUpdate.status === 200) {
+                    alert('Fichier mis à jour avec succès.');
+                } else {
+                    alert('Erreur lors de la mise à jour du fichier.');
+                }
+            } else if (responseCheck.status === 404) {
+                // Le fichier n'existe pas, créez-le
+                const responseCreate = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${github_token}`,
+                    },
+                    body: JSON.stringify({
+                        message: 'Création du fichier',
+                        content: btoa(inputText) // Encodez le texte en base64
+                    })
+                });
+
+                if (responseCreate.status === 201) {
+                    alert('Fichier créé avec succès.');
+                } else {
+                    alert('Erreur lors de la création du fichier.');
+                }
+            } else {
+                alert('Erreur lors de la vérification du fichier.');
+            }
+        }
+    </script>
+</body>
+</html>
