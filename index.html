@@ -27,45 +27,6 @@
             color: white; /* Couleur du titre */
         }
 
-        /* Styles pour le conteneur de saisie */
-        #input-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 50px; /* Marge supérieure du conteneur de saisie */
-        }
-
-        /* Styles pour la zone de saisie */
-        #file-input {
-            font-size: 44px; /* Taille de police de la zone de saisie */
-            padding: 10px; /* Marge intérieure de la zone de saisie */
-            /*width: 300px;  Largeur de la zone de saisie */
-            text-align: center;
-            font-family: 'Calibri';
-	    max-width: 100%; 
-        }
-
-        /* Styles pour le bouton "Ouvrir" */
-        #open-button {
-            font-size: 36px; /* Taille de police du bouton "Ouvrir" */
-            margin-top: 20px; /* Marge supérieure du bouton "Ouvrir" */
-            padding: 10px 20px;
-            background-color: white; /* Couleur de fond du bouton "Ouvrir" */
-            color: black; /* Couleur du texte du bouton "Ouvrir" */
-            border: none;
-            cursor: pointer;
-            /* Styles spécifiques au bouton "Ouvrir" en utilisant la classe "bttn-unite" */
-            border-radius: 100px; /* Forme du bouton */
-            width: 200px; /* Largeur du bouton */
-        }
-
-        /* Styles pour le survol du bouton "Ouvrir" */
-        #open-button:hover {
-            background-color: red; /* Couleur de fond au survol du bouton */
-            color: blue; /* Couleur du texte au survol du bouton */
-        }
-
         /* Styles pour le logo en bas de page */
         #logo {
             position: absolute;
@@ -74,38 +35,18 @@
             transform: translateX(-50%);
         }
 
-        /* Styles pour le bouton "Ouvrir" désactivé */
-        #open-button:disabled {
-            background-color: gray; /* Couleur de fond du bouton désactivé */
-            color: white; /* Couleur du texte du bouton désactivé */
-            cursor: not-allowed;
-        }
-
         /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
-	@media screen and (max-width: 768px) {
-    		#title {
-        		font-size: 50px;
-        		margin-top: 40px;
-    		}
-    		#file-input {
-        		font-size: 24px;
-        		width: 80%;
-    		}
-    		#open-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-    		/* Styles pour le logo en bas de page pour les petits écrans */
-    		#logo {
-        		width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
-        		height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
-    		}
-    		/* Styles pour les textes sous le bouton "Ouvrir" pour les petits écrans */
-    		.result-text {
-        		font-size: 16px;
-    		}
-	}
-
+        @media screen and (max-width: 768px) {
+            #title {
+                font-size: 50px;
+                margin-top: 40px;
+            }
+            /* Styles pour le logo en bas de page pour les petits écrans */
+            #logo {
+                width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
+                height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
+            }
+        }
 
         /* Styles pour le conteneur des textes */
         #text-container {
@@ -120,19 +61,24 @@
         .result-text {
             margin-top: 10px; /* Marge supérieure entre les textes */
         }
+
+        /* Styles pour les boutons */
+        .button-container {
+            margin-top: 20px; /* Marge supérieure entre les boutons */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Style pour les boutons pour les rendre de la même largeur */
+        .custom-button {
+            width: 200px; /* Largeur des boutons */
+        }
     </style>
 </head>
 <body>
     <!-- Titre -->
     <div id="title">LES 24H DU LOUP</div>
-
-    <!-- Conteneur de saisie -->
-    <div id="input-container">
-        <input type="text" id="file-input" placeholder="PRENOM NOM (24)">
-        <br>
-        <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
-        <button class="bttn bttn-unite" id="open-button" disabled>Ouvrir</button>
-    </div>
 
     <!-- Conteneur des textes -->
     <div id="text-container">
@@ -142,95 +88,17 @@
 
     <!-- Logo en bas de page -->
     <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
-    
-    <script>
-        // Déclaration de la variable folderPath
-        var folderPath = 'CodeB/'; // Chemin vers le dossier "CodeB"
 
-        // Fonction pour vérifier si le fichier existe en utilisant une extension
-        function checkFileExistence(fileName, extension, callback) {
-            var url = folderPath + fileName + extension;
+    <!-- Conteneur pour les boutons -->
+    <div class="button-container">
+        <!-- Bouton "Code Barre" -->
+        <button class="bttn bttn-unite custom-button" id="code-barre-button" onclick="location.href='codebarre.html';">Code Barre</button>
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('HEAD', url, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Le fichier existe, appeler le callback avec l'URL du fichier
-                        callback(url);
-                    } else {
-                        // Le fichier n'existe pas, appeler le callback avec null
-                        callback(null);
-                    }
-                }
-            };
-            xhr.send();
-        }
+        <!-- Bouton "Résultat" -->
+        <button class="bttn bttn-unite custom-button" id="result-button" onclick="location.href='results.html';">Résultat</button>
 
-        // Script pour le bouton "Ouvrir" (télécharger)
-        document.getElementById('open-button').addEventListener('click', function () {
-            var fileName = document.getElementById('file-input').value;
-
-            // Essayer d'abord avec l'extension .png
-            checkFileExistence(fileName, '.png', function (url) {
-                if (url) {
-                    // Le fichier PNG existe, créer un lien de téléchargement pour le PNG
-                    var downloadLink = document.createElement('a');
-                    downloadLink.href = url;
-                    downloadLink.download = fileName + '.png';
-                    downloadLink.style.display = 'none';
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-                } else {
-                    // Le fichier PNG n'existe pas, essayer avec l'extension .pdf
-                    checkFileExistence(fileName, '.pdf', function (url) {
-                        if (url) {
-                            // Le fichier PDF existe, créer un lien de téléchargement pour le PDF
-                            var downloadLink = document.createElement('a');
-                            downloadLink.href = url;
-                            downloadLink.download = fileName + '.pdf';
-                            downloadLink.style.display = 'none';
-                            document.body.appendChild(downloadLink);
-                            downloadLink.click();
-                            document.body.removeChild(downloadLink);
-                        } else {
-                            // Ni le fichier PNG ni le fichier PDF n'existent, rediriger vers erreur.html
-                            window.location.href = 'erreur.html';
-                        }
-                    });
-                }
-            });
-        });
-
-        // Fonction pour vérifier si la zone de texte est vide
-        function isInputEmpty() {
-            var fileName = document.getElementById('file-input').value;
-            return fileName.trim() === ''; // Vérifie si le contenu est vide après avoir supprimé les espaces
-        }
-
-        // Fonction pour activer ou désactiver le bouton "Ouvrir"
-        function toggleOpenButton() {
-            var openButton = document.getElementById('open-button');
-            openButton.disabled = isInputEmpty(); // Désactive le bouton si la zone de texte est vide
-        }
-
-        // Fonction pour mettre à jour les textes en fonction de ce qui est saisi
-        function updateResultText() {
-            var fileName = document.getElementById('file-input').value.toUpperCase();
-            document.getElementById('code-barre-text').textContent = fileName;
-            document.getElementById('fiche-resultat-text').textContent = fileName + ' 24';
-        }
-
-        // Écoutez l'événement d'entrée dans la zone de texte
-        document.getElementById('file-input').addEventListener('input', function () {
-            toggleOpenButton();
-            updateResultText();
-        });
-
-        // Appel initial pour vérifier l'état de la zone de texte au chargement de la page
-        toggleOpenButton();
-        updateResultText();
-    </script>
+        <!-- Bouton "SOS" -->
+        <button class="bttn bttn-unite custom-button" id="sos-button" onclick="location.href='sos.html';">SOS</button>
+    </div>
 </body>
 </html>
