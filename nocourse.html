@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreur - LES 24H DU LOUP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+    <link rel="stylesheet" href="bttn.min.css">
+    <style>
+        /* Styles pour l'arrière-plan */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('fond.png'); /* Changer l'image d'arrière-plan ici */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Styles pour le titre */
+        #error-title {
+            font-size: 100px; /* Taille de police réduite pour les écrans plus petits */
+            margin-top: -20px; /* Changer la marge supérieure du titre ici */
+            color: white; /* Changer la couleur du titre ici */
+            white-space: nowrap;
+            line-height: 1.2; /* Ajustez la hauteur de ligne (ligne unique) */
+        }
+
+        /* Styles pour le bouton de retour */
+        /* Ajoutez cette classe pour définir la taille des boutons */
+        .bttn {
+            display: inline-block;
+            margin: 50px;
+            padding: 10px 20px;
+            color: black;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-family: Bangers;
+            font-size: 28px; /* Taille de police réduite pour les écrans plus petits */
+            border-radius: 100px;
+            width: 80%; /* Définissez la largeur souhaitée pour les boutons ici */
+            max-width: 200px; /* Limite la largeur maximale du bouton */
+	    text-decoration: none;
+        }
+	
+
+	/* Styles pour les textes ajoutés pour les grands écrans */
+	.error-text {
+    		font-size: 24px; /* Taille de police pour les grands écrans */
+    		margin-top: 20px; /* Marge supérieure pour les grands écrans */
+    		color: white; /* Couleur du texte en blanc */
+    		font-family: 'Bangers'; /* Police Bangers */
+		}
+
+
+        /* Styles pour le bouton de retour au survol */
+        .bttn-unite:hover {
+            background-color: red; /* Changer la couleur de fond au survol ici */
+            color: blue; /* Changer la couleur du texte au survol ici */
+        }
+
+        /* Styles pour le logo en bas de page */
+        #logo {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Styles spécifiques pour les écrans plus petits (max-width: 768px) */
+        @media screen and (max-width: 768px) {
+            #error-title {
+                font-size: 40px;
+                margin-top: -200px;
+            }
+            
+            .bttn {
+                font-size: 24px;
+            }
+
+            /* Styles pour le logo en bas de page pour les petits écrans */
+            #logo {
+                width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
+                height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
+            }
+
+            /* Styles pour les textes ajoutés pour les petits écrans */
+            .error-text {
+                font-size: 16px;
+                margin-top: 10px;
+                color: white; /* Changer la couleur du texte en blanc */
+                font-family: 'Bangers', sans-serif; /* Utiliser la police Bangers */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="error-title">TU N'AS PAS ENCORE FAIT DE TOUR...</div>
+    <a class="bttn bttn-unite" href="index.html">Retour</a>
+    <!-- Logo en bas de page -->
+    <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
+</body>
+</html>
