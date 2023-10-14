@@ -156,7 +156,7 @@
         // Fonction pour récupérer le token depuis votre application Flask
         async function getToken() {
     		try {
-        		const response = await fetch('http://192.168.1.12:5000/get-token');
+        		const response = await fetch('http://127.0.0.1:5000/get-token');
         		if (response.ok) {
             		const data = await response.json();
             		return data.token;
