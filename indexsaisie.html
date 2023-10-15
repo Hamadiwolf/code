@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LES 24H DU LOUP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+    <!-- Inclure le fichier CSS bttn.min.css pour activer l'animation de bttn-unite -->
+    <link rel="stylesheet" href="bttn.min.css">
+
+    <style>
+        /* Styles communs à tous les écrans */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('fond.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+        }
+
+        /* Styles pour le titre */
+        #title {
+            font-size: 100px; /* Taille de police du titre */
+            margin-top: 90px; /* Marge supérieure du titre */
+            color: white; /* Couleur du titre */
+        }
+
+        /* Styles pour le conteneur de saisie */
+        #input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px; /* Marge supérieure du conteneur de saisie */
+        }
+       /* Styles pour la zone de saisie */
+        #inputText {
+            font-size: 44px; /* Taille de police de la zone de saisie */
+            padding: 10px; /* Marge intérieure de la zone de saisie */
+            /*width: 300px;  Largeur de la zone de saisie */
+            text-align: center;
+            font-family: 'Calibri';
+	    max-width: 100%; 
+        }
+        /* Styles pour le bouton "Soumettre" */
+        #sous-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white; 
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px;
+            width: 200px;
+        }
+	/* Styles pour le bouton "Retour" */
+        #return-button {
+            font-size: 36px; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black; 
+            border: none;
+            cursor: pointer;
+            border-radius: 100px; /* Forme du bouton */
+            width: 200px; /* Largeur du bouton */
+        }
+
+        /* Styles pour le survol du bouton "Soumettre" */
+        #sous-button:hover {
+            background-color: red; /* Couleur de fond au survol du bouton */
+            color: blue; /* Couleur du texte au survol du bouton */
+        }
+	
+	/* Styles pour le survol du bouton "Retour" */
+        #return-button:hover {
+            background-color: red; /* Couleur de fond au survol du bouton */
+            color: blue; /* Couleur du texte au survol du bouton */
+        }
+
+        /* Styles pour le logo en bas de page */
+        #logo {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Styles pour le bouton "Ouvrir" désactivé */
+        #sous-button:disabled {
+            background-color: gray; 
+            color: white; 
+            cursor: not-allowed;
+        }
+
+
+        /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
+	@media screen and (max-width: 768px) {
+    		#title {
+        		font-size: 50px;
+        		margin-top: 40px;
+    		}
+    		#inputText {
+        		font-size: 24px;
+        		width: 80%;
+    		}
+    		#sous-button {
+        		font-size: 28px;
+        		width: 80%;
+    		}
+		#return-button {
+                font-size: 28px;
+                width: 80%;
+            	}
+
+    		/* Styles pour le logo en bas de page pour les petits écrans */
+    		#logo {
+        		width: 120px;
+        		height: auto;
+    		}
+	}
+
+        /* Styles pour le conteneur des textes */
+        #text-container {
+            margin-top: 20px; /* Marge supérieure pour les textes */
+            font-size: 24px; /* Taille de police pour les textes */
+            color: white; /* Couleur du texte */
+            font-family: 'Bangers', sans-serif;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Titre -->
+    <div id="title">LES 24H DU LOUP</div>
+    <!-- Conteneur de saisie -->
+    <div id="input-container">
+        <input type="text" id="inputText" placeholder="LETS'GO">
+        <br>
+        <!-- Utilisation d'un bouton pour le bouton "Ouvrir" -->
+        <button class="bttn bttn-unite" id="sous-button">Soumettre</button>
+    </div>
+    <!-- Bouton "Retour" en dehors du conteneur de saisie -->
+    <button class="bttn bttn-unite" id="return-button" onclick="location.href='index.html'">Retour</button>
+
+    <!-- Logo en bas de page -->
+    <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
+    
+    <script src="main.js"></script>
+</body>
+</html>
