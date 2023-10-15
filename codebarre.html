@@ -187,24 +187,31 @@
         }
 
         // Script pour le bouton "Ouvrir" (télécharger)
-        document.getElementById('open-button').addEventListener('click', function () {
-            var fileName = document.getElementById('file-input').value;
+	// Script pour le bouton "Ouvrir" (télécharger)
+	document.getElementById('open-button').addEventListener('click', function () {
+    	var fileName = document.getElementById('file-input').value;
 
-            // Essayer d'abord avec l'extension .png
-            checkFileExistence(fileName, '.png', function (url) {
-                if (url) {
-                    // Le fichier PDF existe, créer un lien de téléchargement pour le PNG
-                    var downloadLink = document.createElement('a');
-                    downloadLink.href = url;
-                    downloadLink.download = fileName + '.png';
-                    downloadLink.style.display = 'none';
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-                } else {window.location.href = 'erreur.html'
-			}
-            });
-        });
+    	// Ajouter une condition pour vérifier si l'entrée est "WOLF"
+    	if (fileName.toUpperCase() === "WOLF") {
+        	window.location.href = 'https://lameutewolf.com';
+    	} else {
+        	// Essayer d'abord avec l'extension .png
+        	checkFileExistence(fileName, '.png', function (url) {
+            	if (url) {
+                	// Le fichier PDF existe, créer un lien de téléchargement pour le PNG
+                	var downloadLink = document.createElement('a');
+                	downloadLink.href = url;
+                	downloadLink.download = fileName + '.png';
+                	downloadLink.style.display = 'none';
+                	document.body.appendChild(downloadLink);
+                	downloadLink.click();
+                	document.body.removeChild(downloadLink);
+            	} else {
+                	window.location.href = 'erreur.html';
+            	}
+             });
+    	}
+});
 
         // Fonction pour vérifier si la zone de texte est vide
         function isInputEmpty() {
