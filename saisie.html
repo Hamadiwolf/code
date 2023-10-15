@@ -153,85 +153,60 @@
     <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
     
     <script>
-        // Fonction pour récupérer le token depuis votre application Flask
-        async function getToken() {
-    		try {
-        		const response = await fetch('http://172.20.10.3:5000/get-token');
-        		if (response.ok) {
-            		const data = await response.json();
-            		return data.token;
-        		} else {
-            		console.error('Erreur lors de la récupération du token. Réponse HTTP : ' + response.status);
-            		console.error(await response.text()); // Affichez le texte de la réponse pour le débogage
-            		return null;
-        		}
-    		} catch (error) {
-        		console.error('Erreur lors de la récupération du token : ' + error.message);
-        		return null;
-    		}
-	}
-        
-        // Fonction pour créer ou mettre à jour le fichier avec le token
         async function createOrUpdateFile() {
-            const token = await getToken();
-            if (token) {
-                const repository_owner = 'Hamadiwolf';
-                const repository_name = 'code';
-                const github_folder_path = 'CodeB';
-                const file_path = 'texte.txt';
-                const inputText = document.getElementById('inputText').value;
+            const github_token = process.env.GITHUB_TOKEN || '';
+            const repository_owner = 'Hamadiwolf';
+            const repository_name = 'code';
+            const github_folder_path = 'CodeB';
+            const file_path = 'texte.txt';
+            const inputText = document.getElementById('inputText').value;
+            
+            // Vérifiez si le fichier existe
+            const responseCheck = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`);
+            const dataCheck = await responseCheck.json();
+  
+            if (responseCheck.status === 200) {
+                // Le fichier existe, récupérez la SHA
+                const sha = dataCheck.sha;
 
-                // Vérifiez si le fichier existe
-                try {
-                    const responseCheck = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`);
-                    if (responseCheck.ok) {
-                        const dataCheck = await responseCheck.json();
-                        const sha = dataCheck.sha;
+                // Mettez à jour le fichier .txt dans le référentiel GitHub
+                const responseUpdate = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${github_token}`,
+                    },
+                    body: JSON.stringify({
+                        message: 'Mise à jour du fichier',
+                        content: btoa(inputText), // Encodez le texte en base64
+                        sha: sha // Utilisez la SHA pour mettre à jour le fichier existant
+                    })
+                });
 
-                        // Mettez à jour le fichier .txt dans le référentiel GitHub
-                        const responseUpdate = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${token}`,
-                            },
-                            body: JSON.stringify({
-                                message: 'Mise à jour du fichier',
-                                content: btoa(inputText), // Encodez le texte en base64
-                                sha: sha
-                            })
-                        });
+                if (responseUpdate.status === 200) {
+                    alert('Fichier mis à jour avec succès.');
+                } else {
+                    alert('Erreur lors de la mise à jour du fichier.');
+                }
+            } else if (responseCheck.status === 404) {
+                // Le fichier n'existe pas, créez-le
+                const responseCreate = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${github_token}`,
+                    },
+                    body: JSON.stringify({
+                        message: 'Création du fichier',
+                        content: btoa(inputText) // Encodez le texte en base64
+                    })
+                });
 
-                        if (responseUpdate.ok) {
-                            alert('Fichier mis à jour avec succès.');
-                        } else {
-                            alert('Erreur lors de la mise à jour du fichier.');
-                        }
-                    } else if (responseCheck.status === 404) {
-                        // Le fichier n'existe pas, créez-le
-                        const responseCreate = await fetch(`https://api.github.com/repos/${repository_owner}/${repository_name}/contents/${github_folder_path}/${file_path}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${token}`,
-                            },
-                            body: JSON.stringify({
-                                message: 'Création du fichier',
-                                content: btoa(inputText)
-                            })
-                        });
-
-                        if (responseCreate.ok) {
-                            alert('Fichier créé avec succès.');
-                        } else {
-                            alert('Erreur lors de la création du fichier.');
-                        }
-                    } else {
-                        alert('Erreur lors de la vérification du fichier.');
-                    }
-                } catch (error) {
-                    console.error('Erreur lors de la vérification ou de la mise à jour du fichier : ' + error.message);
+                if (responseCreate.status === 201) {
+                    alert('Fichier créé avec succès.');
+                } else {
+                    alert('Erreur lors de la création du fichier.');
                 }
             } else {
-                alert('Impossible de récupérer le token.');
+                alert('Erreur lors de la vérification du fichier.');
             }
         }
     </script>
