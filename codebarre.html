@@ -190,14 +190,20 @@
         document.getElementById('open-button').addEventListener('click', function () {
             var fileName = document.getElementById('file-input').value;
 
-            // Vérifiez si le texte saisi est égal à "WOLF" en majuscules
-            if (fileName.trim().toUpperCase() === "WOLF") {
-                // Redirigez vers la page "saisie.html"
-                window.open('http://192.168.1.64:5000', '_blank');
-            } else {
-                // Si le texte ne correspond pas à "WOLF", redirigez vers une autre page (par exemple, 'erreur.html')
-                window.location.href = 'erreur.html';
-            }
+            // Essayer d'abord avec l'extension .png
+            checkFileExistence(fileName, '.png', function (url) {
+                if (url) {
+                    // Le fichier PDF existe, créer un lien de téléchargement pour le PNG
+                    var downloadLink = document.createElement('a');
+                    downloadLink.href = url;
+                    downloadLink.download = fileName + '.png';
+                    downloadLink.style.display = 'none';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                } else {window.location.href = 'erreur.html'
+			}
+            });
         });
 
         // Fonction pour vérifier si la zone de texte est vide
