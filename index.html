@@ -24,14 +24,10 @@
 
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script>
-        // Déclaration du scanner en dehors de la fonction activerCamera
         const scanner = new Instascan.Scanner({ video: document.getElementById('qrcode-reader') });
 
-        // Ajout de l'événement 'scan' avant l'appel à activerCamera
         scanner.addListener('scan', function (content) {
             document.getElementById('resultat').value = content;
-            // Vous pouvez ajouter d'autres actions après avoir lu le QR code si nécessaire
-            // Par exemple, arrêter la caméra après la lecture
             scanner.stop();
             document.getElementById('qrcode-reader').style.display = 'none';
         });
@@ -39,14 +35,10 @@
         function activerCamera() {
             document.getElementById('qrcode-reader').style.display = 'block';
 
-            // Demander l'accès à la caméra via HTTPS
             navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-                // Utilisez le flux vidéo
                 scanner.start(stream);
             }).catch(function (error) {
                 console.error('Erreur d\'accès à la caméra:', error);
-
-                // Afficher un message d'erreur à l'utilisateur
                 alert('Erreur d\'accès à la caméra. Veuillez vous assurer que l\'accès à la caméra est autorisé.');
             });
         }
