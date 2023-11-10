@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecteur QR Code</title>
+    <title>Lecteur QR Codee</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,14 +36,13 @@
 
         function activerCamera() {
             document.getElementById('qrcode-reader').style.display = 'block';
-            Instascan.Camera.getCameras().then(function (cameras) {
-                if (cameras.length > 0) {
-                    scanner.start(cameras[0]);
-                } else {
-                    console.error('Aucune caméra trouvée.');
-                }
-            }).catch(function (e) {
-                console.error(e);
+
+            // Demander l'accès à la caméra via HTTPS
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                // Utilisez le flux vidéo
+                scanner.start(stream);
+            }).catch(function (error) {
+                console.error('Erreur d\'accès à la caméra:', error);
             });
         }
     </script>
