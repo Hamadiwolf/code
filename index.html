@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecteur QR Codee</title>
+    <title>Lecteur QR Code</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,6 +43,9 @@
                 scanner.start(stream);
             }).catch(function (error) {
                 console.error('Erreur d\'accès à la caméra:', error);
+
+                // Afficher un message d'erreur à l'utilisateur
+                alert('Erreur d\'accès à la caméra. Veuillez vous assurer que l\'accès à la caméra est autorisé.');
             });
         }
     </script>
