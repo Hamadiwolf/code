@@ -3,157 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LES 24H DU LOUP</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
-    <!-- Inclure le fichier CSS bttn.min.css pour activer l'animation de bttn-unite -->
-    <link rel="stylesheet" href="bttn.min.css">
+    <title>Lecteur QR Code</title>
     <style>
-        /* Styles communs à tous les écrans */
         body {
-            margin: 0;
-            padding: 0;
-            background-image: url('fond.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: 'Bangers', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
+            margin: 20px;
         }
 
-        /* Styles pour le titre */
-        #title {
-            font-size: 100px; /* Taille de police du titre */
-            margin-top: 90px; /* Marge supérieure du titre */
-            color: white; /* Couleur du titre */
-        }
-
-        /* Styles pour le logo en bas de page */
-        #logo {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-/* Styles pour le bouton "CodeBarre" */
-        #code-barre-button {
-            font-size: 36px; 
-            margin-top: 20px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black; 
-            border: none;
-            cursor: pointer;
-            border-radius: 100px; /* Forme du bouton */
-            width: 200px; /* Largeur du bouton */
-        }
-/* Styles pour le bouton "Results" */
-        #result-button {
-            font-size: 36px; 
-            margin-top: 20px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black; 
-            border: none;
-            cursor: pointer;
-            border-radius: 100px; /* Forme du bouton */
-            width: 200px; /* Largeur du bouton */
-        }
-/* Styles pour le bouton "loukoumotiv" */
-        #loukoumotiv-button {
-            font-size: 36px; 
-            margin-top: 20px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black; 
-            border: none;
-            cursor: pointer;
-            border-radius: 100px; /* Forme du bouton */
-            width: 200px; /* Largeur du bouton */
-        }
-/* Styles pour le bouton "Shopping" */
-        #shopping-button {
-            font-size: 36px; 
-            margin-top: 20px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black; 
-            border: none;
-            cursor: pointer;
-            border-radius: 100px; /* Forme du bouton */
-            width: 200px; /* Largeur du bouton */
-        }
-
-        /* Styles pour les écrans plus petits (jusqu'à 768px de largeur) */
-        @media screen and (max-width: 768px) {
-            #title {
-                font-size: 50px;
-                margin-top: 40px;
-            }
-	    #loukoumotiv-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-	    #result-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-	    #shopping-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-	    #code-barre-button {
-        		font-size: 28px;
-        		width: 80%;
-    		}
-            /* Styles pour le logo en bas de page pour les petits écrans */
-            #logo {
-                width: 120px; /* Ajustez la largeur du logo pour les petits écrans */
-                height: auto; /* Assurez-vous que la hauteur s'ajuste automatiquement */
-            }
-        }
-
-        /* Styles pour les textes */
-        .result-text {
-            margin-top: 10px; /* Marge supérieure entre les textes */
-        }
-
-        /* Styles pour les boutons */
-        .button-container {
-            margin-top: 20px; /* Marge supérieure entre les boutons */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Style pour les boutons pour les rendre de la même largeur */
-        .custom-button {
-            width: 200px; /* Largeur des boutons */
+        #qrcode-reader {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Titre -->
-    <div id="title">LES 24H DU LOUP</div>
+    <h1>Lecteur QR Code</h1>
+    <button onclick="activerCamera()">Scann</button>
+    <input type="text" id="resultat" placeholder="Résultat du QR Code">
+    <video id="qrcode-reader"></video>
 
-   
+    <script src="https://cdn.jsdelivr.net/npm/instascan@2.0.1/dist/instascan.min.js"></script>
+    <script>
+        const scanner = new Instascan.Scanner({ video: document.getElementById('qrcode-reader') });
 
-    <!-- Logo en bas de page -->
-    <img id="logo" src="logo.png" alt="Logo" width="195" height="230">
+        scanner.addListener('scan', function (content) {
+            document.getElementById('resultat').value = content;
+            // Vous pouvez ajouter d'autres actions après avoir lu le QR code si nécessaire
+            // Par exemple, arrêter la caméra après la lecture
+            scanner.stop();
+            document.getElementById('qrcode-reader').style.display = 'none';
+        });
 
-    <!-- Conteneur pour les boutons -->
-    <div class="button-container">
-        <!-- Bouton "Code Barre" -->
-        <button class="bttn bttn-unite custom-button" id="code-barre-button" onclick="location.href='codebarre.html';">Code Barre</button>
-
-        <!-- Bouton "Résultat" -->
-        <button class="bttn bttn-unite custom-button" id="result-button" onclick="location.href='results.html';">Résultat</button>
-
-        <!-- Bouton "loukoumotiv" -->
-	<button class="bttn bttn-unite custom-button" id="loukoumotiv-button" onclick="window.open('https://pay.sumup.com/b2c/QVFJ9I0U', '_blank');">loukoumotiv</button>
-
-        <!-- Bouton "shopping" -->
-	<button class="bttn bttn-unite custom-button" id="shopping-button" onclick="window.open('https://www.lameutewolf.com', '_blank');">shopping</button>
-
-    </div>
+        function activerCamera() {
+            document.getElementById('qrcode-reader').style.display = 'block';
+            Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('Aucune caméra trouvée.');
+                }
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }
+    </script>
 </body>
 </html>
