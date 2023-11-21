@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire MQTT</title>
+</head>
+<body>
+    <h1>Formulaire MQTT</h1>
+    <form id="mqttForm">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" required><br>
+
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" required><br>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required><br>
+
+        <input type="submit" value="Envoyer">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.0.0/mqtt.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
